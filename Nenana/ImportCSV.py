@@ -1,5 +1,5 @@
 from csv import * #import the CSV module for functionality
-from ImportCSV import Open
+from ImportCSV import Open, open
 
 
 class ImportCsv(object):
@@ -18,6 +18,9 @@ class ImportCsv(object):
         """:type: int"""
         self.list = []
         """:type: list"""
+
+    #Public Members - Do not Access From outside the Class!
+    #########################################################
 
     #get the class attributes without calling them directly
     #This causes the class attributes to be private
@@ -39,21 +42,30 @@ class ImportCsv(object):
         try:
             #Open the currently selected file to stream data through
             with open(self.filepath) as csvFile:
-                reader = csv.reader(csvFile)
+                reader = csv.reader(csvFile, deliminator=self.strDeliminator, quotechar=self.strQuoteChar)
                 for row in reader:
                     list.append(row)
                 return list
         except errorValue:
-            return (list = [None])
+            list = []
+            return list
 
     #Write to the datastream in csv format
-    def WriteToFile(self, )
+    def WriteToFile(self, writeList: list) -> str:
+        try:
+            if (self.iColumnCount >= 0):
+                raise NameError("Column Count is less than zero")
+            else:
+                with open(self.strFilePath) as csvFile:
+                    writer = csv.Writer(self.strFilePath)
+                for row in writeList:
+                    writer.
+        except errorValue:
+            return errorValue
+
+    #########################################################
+             
+
 
     #Private Members - Do not Access From outside the Class!
     #########################################################
-
-
-
-
-    
-
